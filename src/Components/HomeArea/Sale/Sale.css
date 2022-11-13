@@ -1,0 +1,9 @@
+.Sale {
+	color: yellow;
+    background-color: black;
+}
+
+.Sale > span {
+    text-decoration: underline;
+}
+
