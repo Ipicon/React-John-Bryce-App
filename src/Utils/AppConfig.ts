@@ -1,7 +1,7 @@
 // General configuration...
 class AppConfig {
     public productsUrl = "";
-    public productImagesUrl = "";
+    public productsImagesUrl = "";
 }
 
 // Dev configuration...

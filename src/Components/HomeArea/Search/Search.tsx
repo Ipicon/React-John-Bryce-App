@@ -1,4 +1,5 @@
 import { ChangeEvent, SyntheticEvent, useState } from "react";
+import notifyService from "../../../Services/NotifyService";
 import "./Search.css";
 
 function Search(): JSX.Element {
@@ -17,7 +18,7 @@ function Search(): JSX.Element {
     }
 
     function searchWebsite(): void {
-        alert("Searching for " + item);
+        notifyService.success("Searching for " + item);
         setItem("");
     }
 

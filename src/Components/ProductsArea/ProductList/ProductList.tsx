@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import ProductModel from "../../../Models/ProductModel";
+import notifyService from "../../../Services/NotifyService";
 import productsService from "../../../Services/ProductsService";
 import ProductCard from "../ProductCard/ProductCard";
 import "./ProductList.css";
@@ -11,7 +12,7 @@ function ProductList(): JSX.Element {
     useEffect(() => {
         productsService.getAllProducts()
             .then(products => setProducts(products))
-            .catch(err => alert(err.message));
+            .catch(err => notifyService.error(err));
     }, []);
 
     return (

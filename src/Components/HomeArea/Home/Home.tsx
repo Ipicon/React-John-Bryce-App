@@ -1,3 +1,4 @@
+import notifyService from "../../../Services/NotifyService";
 import BestSeller from "../BestSeller/BestSeller";
 import Clock from "../Clock/Clock";
 import Desserts from "../Desserts/Desserts";
@@ -12,7 +13,7 @@ import "./Home.css";
 function Home(): JSX.Element {
 
     function handleSurvey(result: string) {
-        alert("Survey result: " + result);
+        notifyService.success("Survey result: " + result);
     }
 
     return (
