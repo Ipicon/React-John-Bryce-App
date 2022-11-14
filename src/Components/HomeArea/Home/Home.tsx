@@ -6,6 +6,7 @@ import Sale from "../Sale/Sale";
 import Search from "../Search/Search";
 import Survey from "../Survey/Survey";
 import Tune from "../Tune/Tune";
+import Wishlist from "../Wishlist/Wishlist";
 import "./Home.css";
 
 function Home(): JSX.Element {
@@ -30,7 +31,7 @@ function Home(): JSX.Element {
             {/* Child to parent flow: */}
             <Survey surveyQuestion="How is our service? " handleSurvey={handleSurvey} />
 
-            {/* State: */}
+            {/* useState: */}
             <BestSeller />
 
             {/* useRef */}
@@ -39,7 +40,10 @@ function Home(): JSX.Element {
             {/* Two-Way Binding: */}
             <Search />
 
+            {/* useEffect */}
             <Clock />
+
+            <Wishlist />
 
         </div>
     );

@@ -4,3 +4,9 @@
     gap: 20px;
     padding-top: 20px;
 }
+
+.Menu .active {
+    color: green;
+    font-family: Arial;
+    font-weight: bold;
+}

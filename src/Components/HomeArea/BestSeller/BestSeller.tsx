@@ -12,6 +12,7 @@ function BestSeller(): JSX.Element {
     const [totalItems, setTotalItems] = useState<number>(0);
 
     function show(): void {
+        
         setName("Falafel Ubanav");
         setTotalItems(10);
     }
