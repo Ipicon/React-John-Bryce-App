@@ -1,8 +1,11 @@
 import notifyService from "../../../Services/NotifyService";
+import usePageTitle from "../../../Utils/usePageTitle";
 import BestSeller from "../BestSeller/BestSeller";
 import Clock from "../Clock/Clock";
 import Desserts from "../Desserts/Desserts";
 import Discount from "../Discount/Discount";
+import Facebook from "../Facebook/Facebook";
+import Orders from "../Orders/Orders";
 import Sale from "../Sale/Sale";
 import Search from "../Search/Search";
 import Survey from "../Survey/Survey";
@@ -11,6 +14,8 @@ import Wishlist from "../Wishlist/Wishlist";
 import "./Home.css";
 
 function Home(): JSX.Element {
+
+    usePageTitle("Home Page");
 
     function handleSurvey(result: string) {
         notifyService.success("Survey result: " + result);
@@ -45,6 +50,12 @@ function Home(): JSX.Element {
             <Clock />
 
             <Wishlist />
+
+            {/* CSS Modules */}
+            <Facebook />
+
+            {/* Using HOC */}
+            <Orders />
 
         </div>
     );
