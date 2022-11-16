@@ -10,6 +10,7 @@ import Sale from "../Sale/Sale";
 import Search from "../Search/Search";
 import Survey from "../Survey/Survey";
 import Tune from "../Tune/Tune";
+import Vat from "../Vat/Vat";
 import Wishlist from "../Wishlist/Wishlist";
 import "./Home.css";
 
@@ -56,6 +57,10 @@ function Home(): JSX.Element {
 
             {/* Using HOC */}
             <Orders />
+
+            {/* Testing */}
+            <br />
+            <Vat percent={17} />
 
         </div>
     );

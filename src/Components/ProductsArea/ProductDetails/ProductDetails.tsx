@@ -5,6 +5,7 @@ import ProductModel from "../../../Models/ProductModel";
 import notifyService from "../../../Services/NotifyService";
 import productsService from "../../../Services/ProductsService";
 import appConfig from "../../../Utils/AppConfig";
+import Spinner from "../../SharedArea/Spinner/Spinner";
 import "./ProductDetails.css";
 
 function ProductDetails(): JSX.Element {
@@ -38,19 +39,25 @@ function ProductDetails(): JSX.Element {
 
             <h2>Product Details: </h2>
 
-            <h3>Name: {product?.name}</h3>
-            <h3>Price: ${product?.price}</h3>
-            <h3>Stock: {product?.stock}</h3>
-            <img src={appConfig.productsImagesUrl + product?.imageName} />
+            {!product && <Spinner />}
 
-            <br />
-            <br />
+            {product &&
+                <>
+                    <h3>Name: {product.name}</h3>
+                    <h3>Price: ${product.price}</h3>
+                    <h3>Stock: {product.stock}</h3>
+                    <img src={appConfig.productsImagesUrl + product.imageName} />
 
-            <NavLink to="/products">Back</NavLink>
-            <span> | </span>
-            <NavLink to={"/products/edit/" + product?.id}>Edit</NavLink>
-            <span> | </span>
-            <NavLink to="#" onClick={deleteProduct}>Delete</NavLink>
+                    <br />
+                    <br />
+
+                    <NavLink to="/products">Back</NavLink>
+                    <span> | </span>
+                    <NavLink to={"/products/edit/" + product.id}>Edit</NavLink>
+                    <span> | </span>
+                    <NavLink to="#" onClick={deleteProduct}>Delete</NavLink>
+                </>
+            }
 
         </div>
     );
