@@ -1,4 +1,5 @@
 import usePageTitle from "../../../Utils/usePageTitle";
+import Clock from "../Clock/Clock";
 import "./About.css";
 
 function About(): JSX.Element {
@@ -7,7 +8,7 @@ function About(): JSX.Element {
 
     return (
         <div className="About">
-			About...
+            <Clock format="12h" />
         </div>
     );
 }

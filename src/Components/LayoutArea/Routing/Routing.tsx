@@ -1,6 +1,8 @@
 import { Fragment } from "react";
 import LoadableExport from "react-loadable";
 import { Navigate, Route, Routes } from "react-router-dom";
+import Login from "../../AuthArea/Login/Login";
+import Register from "../../AuthArea/Register/Register";
 import Home from "../../HomeArea/Home/Home";
 import AddProduct from "../../ProductsArea/AddProduct/AddProduct";
 import EditProduct from "../../ProductsArea/EditProduct/EditProduct";
@@ -18,6 +20,10 @@ function Routing(): JSX.Element {
 
     return (
         <Routes>
+            
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+
             <Route path="/home" element={<Home />} />
             <Route path="/products" element={<ProductList />} />
             <Route path="/products/details/:id" element={<ProductDetails />} />

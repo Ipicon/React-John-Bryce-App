@@ -34,30 +34,26 @@ function ProductDetails(): JSX.Element {
         }
     }
 
+    if (!product) return <Spinner />;
+
     return (
         <div className="ProductDetails">
 
             <h2>Product Details: </h2>
 
-            {!product && <Spinner />}
+            <h3>Name: {product?.name}</h3>
+            <h3>Price: ${product?.price}</h3>
+            <h3>Stock: {product?.stock}</h3>
+            <img src={appConfig.productsImagesUrl + product?.imageName} />
 
-            {product &&
-                <>
-                    <h3>Name: {product.name}</h3>
-                    <h3>Price: ${product.price}</h3>
-                    <h3>Stock: {product.stock}</h3>
-                    <img src={appConfig.productsImagesUrl + product.imageName} />
+            <br />
+            <br />
 
-                    <br />
-                    <br />
-
-                    <NavLink to="/products">Back</NavLink>
-                    <span> | </span>
-                    <NavLink to={"/products/edit/" + product.id}>Edit</NavLink>
-                    <span> | </span>
-                    <NavLink to="#" onClick={deleteProduct}>Delete</NavLink>
-                </>
-            }
+            <NavLink to="/products">Back</NavLink>
+            <span> | </span>
+            <NavLink to={"/products/edit/" + product?.id}>Edit</NavLink>
+            <span> | </span>
+            <NavLink to="#" onClick={deleteProduct}>Delete</NavLink>
 
         </div>
     );

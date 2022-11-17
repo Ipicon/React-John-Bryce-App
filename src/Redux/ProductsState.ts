@@ -71,11 +71,11 @@ export function productsReducer(currentState = new ProductsState(), action: Prod
 // Without middleware, without devtools:
 // export const productsStore = createStore(productsReducer);
 
-// // With middleware, without devtools:
-// export const productsStore = createStore(
-//     productsReducer, 
-//     applyMiddleware(countActions, logger)
-// );
+// With middleware, without devtools:
+export const productsStore = createStore(
+    productsReducer, 
+    applyMiddleware(countActions, logger)
+);
 
 // // With devtools, without middleware:
 // export const productsStore = createStore(
@@ -83,9 +83,9 @@ export function productsReducer(currentState = new ProductsState(), action: Prod
 //     composeWithDevTools()
 // );
 
-// Width middleware, with devtools:
-export const productsStore = createStore(
-    productsReducer,
-    compose(applyMiddleware(countActions, logger), composeWithDevTools())
-);
+// // Width middleware, with devtools:
+// export const productsStore = createStore(
+//     productsReducer,
+//     compose(applyMiddleware(countActions, logger), composeWithDevTools())
+// );
 
