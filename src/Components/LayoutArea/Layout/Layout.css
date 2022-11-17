@@ -2,15 +2,15 @@
 	height: 100%;
     box-sizing: border-box;
     display: grid;
-    grid-template-rows: 15% 80% 5%; /* Rows height */
-    grid-template-columns: repeat(6, 1fr); /* fr = fraction = one unit */
+    grid-template-rows: 15% 80% 5%;
+    grid-template-columns: repeat(6, 1fr);
 }
 
 .Layout, .Layout > * {
     border: 1px solid;
 }
 
-.Layout > header, .Layout > footer {
+.Layout > header, .Layout> footer {
     grid-column: span 6;
 }
 

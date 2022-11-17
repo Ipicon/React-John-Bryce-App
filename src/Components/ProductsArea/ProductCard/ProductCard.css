@@ -1,8 +1,8 @@
 .ProductCard {
-	width: 300px;
+	width: 280px;
     display: inline-flex;
     text-align: left;
-    background-image: linear-gradient(90deg, lightgreen, white);
+    background-image: linear-gradient(90deg, deeppink, red);
 }
 
 .ProductCard img {

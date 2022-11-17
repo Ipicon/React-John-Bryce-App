@@ -1,0 +1,10 @@
+.EmployeeList table, th, td {
+    border: 1px solid blueviolet;
+}
+
+.EmployeeList > table {
+    border-collapse: collapse;
+}
+.EmployeeList tr:hover {
+    cursor: pointer;
+}

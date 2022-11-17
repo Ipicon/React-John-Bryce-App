@@ -1,32 +1,32 @@
 import axios from "axios";
-import { authStore } from "../Redux/AuthState";
 import authService from "./AuthService";
+import {authStore} from "../Redux/AuthState";
 
 class InterceptorsService {
-
-    public createInterceptors(): void {
-
+    public createInterceptor(): void {
         axios.interceptors.request.use(request => {
-            if (request.url.indexOf("products") >= 0) {
-                console.log("Start Request...", request);
+            if (request.url?.indexOf("product") !== -1) {
+                console.log("Start Request:", request);
             }
+
             return request;
         });
 
         axios.interceptors.response.use(response => {
-            if (response.config.url.indexOf("products") >= 0) {
-                console.log("Got Response...", response);
+            if (response.config.url?.indexOf("product") !== -1) {
+                console.log("Got Response:", response);
             }
+
             return response;
         });
 
         axios.interceptors.request.use(request => {
-            if (authService.isLoggedIn) {
-                request.headers.authorization = "Bearer " + authStore.getState().token // Don't forget the space after Bearer
+            if (authService.isLoggedIn && request.headers) {
+                request.headers.Authorization = "Bearer " + authStore.getState().token;
             }
-            return request;
-        });
 
+           return request;
+        });
     }
 }
 

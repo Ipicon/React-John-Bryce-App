@@ -1,49 +1,48 @@
-import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import UserModel from "../../../Models/UserModel";
-import authService from "../../../Services/AuthService";
-import notifyService from "../../../Services/NotifyService";
 import "./Register.css";
+import {useForm} from "react-hook-form";
+import UserModel from "../../../Models/UserModel";
+import notifyService from "../../../Services/NotifyService";
+import authService from "../../../Services/AuthService";
+import {useNavigate} from "react-router-dom";
 
 function Register(): JSX.Element {
-
-    const { register, handleSubmit, formState } = useForm<UserModel>();
     const navigate = useNavigate();
+    const {register, handleSubmit, formState: {errors}} = useForm<UserModel>();
 
-    async function send(user: UserModel) {
+    const send = async(user: UserModel) => {
         try {
             await authService.register(user);
-            notifyService.success("Welcome " + user.firstName);
-            navigate("/home");
-        }
-        catch (err: any) {
+
+            notifyService.success(`Welcome ${user.firstName}`);
+            navigate('/home');
+        } catch (err) {
             notifyService.error(err);
         }
     }
 
     return (
         <div className="Register Box">
-
-            <h2>Register</h2>
+			<h2>Register</h2>
 
             <form onSubmit={handleSubmit(send)}>
-
                 <label>First name: </label>
-                <input type="text" {...register("firstName")} />
+                <input type="text" {...register("firstName", UserModel.firstNameValidation)}/>
+                <span>{errors.firstName?.message}</span>
 
                 <label>Last name: </label>
-                <input type="text" {...register("lastName")} />
+                <input type="text" {...register("lastName", UserModel.lastNameValidation)}/>
+                <span>{errors.lastName?.message}</span>
 
                 <label>Username: </label>
-                <input type="text" {...register("username")} />
+                <input type="text" {...register("username", UserModel.usernameValidation)}/>
+                <span>{errors.username?.message}</span>
 
                 <label>Password: </label>
-                <input type="password" {...register("password")} />
+                <input type="password" {...register("password", UserModel.passwordValidation)}/>
+                <span>{errors.password?.message}</span>
 
                 <button>Register</button>
-
             </form>
-
         </div>
     );
 }

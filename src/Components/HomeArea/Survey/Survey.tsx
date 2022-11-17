@@ -1,22 +1,22 @@
 import "./Survey.css";
 
 interface SurveyProps {
-    surveyQuestion: string;
     handleSurvey: (str: string) => void;
+    message: string;
 }
 
 function Survey(props: SurveyProps): JSX.Element {
+    const handleClick = (surveyStatus: string): void => {
+        props.handleSurvey(surveyStatus);
 
-    function sendResult(result: string): void {
-        props.handleSurvey(result);
     }
 
     return (
         <div className="Survey Box">
-            <span> {props.surveyQuestion} </span>
-            <button onClick={() => sendResult("Poor")}>Poor</button>
-            <button onClick={() => sendResult("Medium")}>Medium</button>
-            <button onClick={() => sendResult("Good")}>Good</button>
+            <span> {props.message} </span>
+            <button onClick={() => handleClick("Poor")}>Poor</button>
+            <button onClick={() => handleClick("Medium")}>Medium</button>
+            <button onClick={() => handleClick("Good")}>Good</button>
         </div>
     );
 }

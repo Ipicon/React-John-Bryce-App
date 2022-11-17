@@ -1,7 +1,7 @@
-import { NavLink } from "react-router-dom";
+import "./ProductCard.css";
 import ProductModel from "../../../Models/ProductModel";
 import appConfig from "../../../Utils/AppConfig";
-import "./ProductCard.css";
+import {Link} from "react-router-dom";
 
 interface ProductCardProps {
     product: ProductModel;
@@ -12,15 +12,15 @@ function ProductCard(props: ProductCardProps): JSX.Element {
         <div className="ProductCard Box">
             <div>
                 {props.product.name}
-                <br />
-                Price: ${props.product.price}
-                <br />
+                <br/>
+                Price: {props.product.price}$
+                <br/>
                 Stock: {props.product.stock}
             </div>
             <div>
-                <NavLink to={"/products/details/" + props.product.id}>
-                    <img src={appConfig.productsImagesUrl + props.product.imageName} />
-                </NavLink>
+                <Link to={`/products/details/${props.product.id}`}>
+                    <img src={appConfig.productImagesUrl + props.product.imageName} alt="product"/>
+                </Link>
             </div>
         </div>
     );

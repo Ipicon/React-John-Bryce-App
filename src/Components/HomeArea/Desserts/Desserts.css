@@ -3,8 +3,8 @@
     align-items: center;
 }
 
-.Desserts > img {
-	width: 20px;
+.Desserts > img{
+    width: 20px;
     height: 20px;
     margin: 0 10px;
 }

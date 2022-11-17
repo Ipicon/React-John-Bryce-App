@@ -1,10 +1,9 @@
-import { useEffect } from "react";
+import {useEffect} from "react";
 
-function usePageTitle(title: string): void {
+const usePageTitle = (title: string): void => {
     useEffect(() => {
         window.document.title = title;
-    }, []);
+    }, [title])
 }
-
 
 export default usePageTitle;

@@ -1,13 +1,17 @@
 .Menu {
-	display: flex;
-    flex-direction: column;
+    display: flex;
+	flex-direction: column;
     gap: 20px;
     padding-top: 20px;
 }
 
 .Menu .active {
-    color: green;
-    font-family: Arial;
+    color: peachpuff;
+    font-family: Arial, serif;
     font-weight: bold;
 }
 
+TotalProducts {
+    position: absolute;
+    bottom: 50px;
+}

@@ -1,19 +1,23 @@
-import { Store } from "redux";
-import { ProductsAction, ProductsState } from "./ProductsState";
+import {ProductActionType, ProductsAction, ProductsState} from "./ProductsState";
+import {Middleware} from "redux";
 
 let counter = 0;
 
-export function countActions(productsStore: any) {
-    return function (next: Function) {
-        return function (action: ProductsAction) {
-            console.log(`Current Action: ${action.type}, Total Actions: ${++counter}`);
+export const countActions: Middleware<{}, ProductsState> = storeApi => next => action => {
+    console.log(`Current Action ${action.type}, Total Action ${++counter}`);
 
-            // Here, store contains the current state (before dispatch)
+    // Before state
 
-            next(action); // Here the reducer will be invoked
+    next(action); // Here the reducer will be invoked
 
-            // Here, store contains the next state (after dispatch)
+    // After state
+}
 
-        }
+export const addActionsClearing: Middleware<{}, ProductsState> = storeApi => next => (action: ProductsAction) => {
+    next(action);
+
+    if (action.type === ProductActionType.AddProduct) {
+        console.clear()
+        console.log("Added product", action.payload)
     }
 }

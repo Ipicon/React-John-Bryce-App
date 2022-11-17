@@ -1,43 +1,42 @@
-import { useEffect, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import "./AuthMenu.css";
+import {useEffect, useState} from "react";
 import UserModel from "../../../Models/UserModel";
-import { authStore } from "../../../Redux/AuthState";
+import {authStore} from "../../../Redux/AuthState";
+import {Link, useNavigate} from "react-router-dom";
 import authService from "../../../Services/AuthService";
 import notifyService from "../../../Services/NotifyService";
-import "./AuthMenu.css";
 
 function AuthMenu(): JSX.Element {
-
-    const [user, setUser] = useState<UserModel>();
+    const [user, setUser] = useState<UserModel | null>(null)
 
     useEffect(() => {
         setUser(authStore.getState().user);
-        const unsubscribe = authStore.subscribe(() => setUser(authStore.getState().user));
+
+        const unsubscribe = authStore.subscribe(() => setUser(authStore.getState().user))
+
         return () => unsubscribe();
-    }, []);
+    }, [])
 
-    function logout() {
+    const logout = () => {
         authService.logout();
-        notifyService.success("Bye bye");
+        notifyService.success("bye bye");
     }
 
-    if (user) {
-        return (
-            <div className="AuthMenu">
-                <span>Hello {user.firstName} {user.lastName}</span>
-                <span> | </span>
-                <NavLink to="/home" onClick={logout}>Logout</NavLink>
-            </div>
-        );
-    }
+    if (user) return (
+      <div className="AuthMenu">
+          <span>Hello {user.firstName} {user.lastName}</span>
+          <span> | </span>
+          <Link to="/home" onClick={logout}>Logout</Link>
+      </div>
+    );
 
     return (
         <div className="AuthMenu">
-            <span>Hello Guest</span>
+            <span>Hello guest</span>
             <span> | </span>
-            <NavLink to="/register">Register</NavLink>
+            <Link to="/register">Register</Link>
             <span> | </span>
-            <NavLink to="/login">Login</NavLink>
+            <Link to="/login">Login</Link>
         </div>
     );
 }

@@ -1,10 +1,9 @@
 import "./Spinner.css";
-import imgSource from "../../../Assets/Images/loading.gif";
 
 function Spinner(): JSX.Element {
     return (
         <div className="Spinner">
-            <img src={imgSource} />
+			<img src={process.env.REACT_APP_PUBLIC_URL + "loading.gif"} alt="Loading" />
         </div>
     );
 }

@@ -1,16 +1,17 @@
-import { useEffect, useState } from "react";
-import { productsStore } from "../../../Redux/ProductsState";
 import "./TotalProducts.css";
+import {useEffect, useState} from "react";
+import {productStore} from "../../../Redux/ProductsState";
 
 function TotalProducts(): JSX.Element {
-
     const [count, setCount] = useState<number>();
 
     useEffect(() => {
-        setCount(productsStore.getState().products.length);
-        const unsubscribe = productsStore.subscribe(() => setCount(productsStore.getState().products.length));
+        setCount(productStore.getState().products.length);
+
+        const unsubscribe = productStore.subscribe(() => setCount(productStore.getState().products.length));
+
         return () => unsubscribe();
-    }, []);
+    }, [])
 
     return (
         <div className="TotalProducts Box">

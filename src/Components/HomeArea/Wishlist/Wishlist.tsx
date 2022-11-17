@@ -1,29 +1,27 @@
-import { ChangeEvent, useState } from "react";
-import "./Wishlist.css";
+import "./WishList.css";
+import {useState, ChangeEvent} from "react";
 
-function Wishlist(): JSX.Element {
+function WishList(): JSX.Element {
+    const [currentItem, setCurrentItem] = useState("");
+    const [wishList, setWishList] = useState<string[]>([]);
 
-    const [item, setItem] = useState<string>("");
-    const [wishlist, setWishlist] = useState<string[]>([]);
-
-    function handleItem(args: ChangeEvent<HTMLInputElement>): void {
-        setItem(args.target.value);
+    const handleInput = (args: ChangeEvent<HTMLInputElement>) => {
+        setCurrentItem(args.target.value);
     }
 
-    function handleAdd(): void {
-        const duplicate = [...wishlist, item]; // Duplicate the array + add item.
-        setWishlist(duplicate);
-        setItem("");
+    const addItem = () => {
+        setWishList([...wishList, currentItem]);
+        setCurrentItem("");
     }
 
     return (
-        <div className="Wishlist Box">
-            <label>Black Friday Wishlist: </label>
-            <input type="text" value={item} onChange={handleItem} />
-            <button onClick={handleAdd}>Add</button>
-            {wishlist.map((oneItem, index) => <span key={index}>{oneItem} | </span>)}
+        <div className="WishList Box">
+            <span>Black Friday Wishlist:</span>
+            <input type="text" value={currentItem} onChange={handleInput}/>
+            <button onClick={addItem}>Add</button>
+            {wishList.map((e, i) => <span key={i}> {e} {i !== wishList.length - 1 && <span>|</span>}</span>)}
         </div>
     );
 }
 
-export default Wishlist;
+export default WishList;

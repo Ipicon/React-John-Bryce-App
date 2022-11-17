@@ -2,21 +2,22 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import Layout from './Components/LayoutArea/Layout/Layout';
-import { BrowserRouter } from 'react-router-dom';
-import interceptorsService from './Services/InterceptorsService';
-import { Provider } from 'react-redux';
-import { productsStore } from './Redux/ProductsState';
+import Layout from "./Components/LayoutArea/Layout/Layout";
+import {BrowserRouter} from "react-router-dom";
+import interceptorsService from "./Services/InterceptorsService";
+import {Provider} from "react-redux";
+import {productStore} from "./Redux/ProductsState";
+import {authStore} from "./Redux/AuthState";
 
-interceptorsService.createInterceptors();
+interceptorsService.createInterceptor();
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );
 root.render(
     <BrowserRouter>
-        <Provider store={productsStore}>
-            <Layout />
+        <Provider store={productStore}>
+            <Layout/>
         </Provider>
     </BrowserRouter>
 );

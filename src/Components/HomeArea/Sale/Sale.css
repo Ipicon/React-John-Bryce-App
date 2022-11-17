@@ -1,9 +1,8 @@
 .Sale {
-	color: yellow;
-    background-color: black;
+	color: pink;
+    background-color: slategray;
 }
 
 .Sale > span {
     text-decoration: underline;
 }
-

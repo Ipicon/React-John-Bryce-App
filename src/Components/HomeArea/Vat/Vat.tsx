@@ -1,43 +1,39 @@
-import { ChangeEvent, useState } from "react";
-import monetaryService from "../../../Services/MonetaryService";
 import "./Vat.css";
+import {ChangeEvent, useState} from "react";
+import monetaryService from "../../../Services/MonetaryService";
 
 interface VatProps {
-    percent: number;
+	percent: number
 }
 
 function Vat(props: VatProps): JSX.Element {
+    const [price, setPrice] = useState<number>(0);
+    const [vat, setVat] = useState<number>(0)
 
-    const [price, setPrice] = useState<number>();
-    const [vat, setVat] = useState<number>(0);
-
-    function handlePrice(args: ChangeEvent<HTMLInputElement>): void {
+    const handlePrice = (args: ChangeEvent<HTMLInputElement>): void => {
         const price = +args.target.value;
         setPrice(price);
         const vat = monetaryService.getVat(price, props.percent);
         setVat(vat);
     }
 
-    function handleClear(): void {
+    const handleClear = () => {
         setPrice(0);
         setVat(0);
     }
 
     return (
         <div className="Vat Box" data-testid="main-div">
-
-            <h4>VAT Calculator</h4>
-
-            <label title="Calculating VAT">
+			<h4> Vat Calculator</h4>
+            <label title="Calculating Vat">
                 Price:
-                <input type="number" placeholder="enter price" onChange={handlePrice} value={price || ""} />
+                <input type="number" placeholder="enter price" value={price || ""} onChange={handlePrice}/>
             </label>
 
-            <p role="result">{price} x {props.percent}% = {vat}</p>
+            <p role="result">{price}$ X {props.percent}% = ${vat}</p>
 
             <button onClick={handleClear}>Clear</button>
-
-        </div>
+            </div>
     );
 }
 

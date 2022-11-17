@@ -1,14 +1,12 @@
-import usePageTitle from "../../../Utils/usePageTitle";
-import Clock from "../Clock/Clock";
 import "./About.css";
+import usePageTitle from "../../../Utils/usePageTitle";
+import IDontBelieveImUsingCC from "../IDontBelieveImUsingCC/IDontBelieveImUsingCC";
 
 function About(): JSX.Element {
-
-    usePageTitle("About");
-
+    usePageTitle("About Page");
     return (
         <div className="About">
-            <Clock format="12h" />
+			<IDontBelieveImUsingCC format="24h" />
         </div>
     );
 }

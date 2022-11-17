@@ -8,7 +8,7 @@ interface SaleProps {
 function Sale(props: SaleProps): JSX.Element {
     return (
         <div className="Sale Box">
-			<span>Sale: {props.percent}% discount on all {props.category}!</span>
+			<span>Sale: {props.percent}% discount on all {props.category}</span>
         </div>
     );
 }

@@ -1,12 +1,13 @@
-import BackgroundByHour from "../../SharedArea/BackgroundByHour/BackgroundByHour";
 import "./Orders.css";
+import withBackgroundByHour from "../../SharedArea/BackgroundByHour/WithBackgroundByHour";
 
-function Orders(): JSX.Element {
+function Orders(props : {number : number}): JSX.Element {
     return (
         <div className="Orders">
-			<span>Delivery Hours: 09:00 to 21:00</span>
+            <span>Delivery Hours: 9:00 to 21:00</span>
+            <span>{props.number}</span>
         </div>
     );
 }
 
-export default BackgroundByHour(Orders);
+export default withBackgroundByHour(Orders);

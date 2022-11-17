@@ -1,91 +1,99 @@
-import { applyMiddleware, compose, createStore } from "redux";
 import ProductModel from "../Models/ProductModel";
-import { countActions } from "./Middleware";
-import { logger } from "redux-logger"; // logger is the Middleware function
-import { composeWithDevTools } from "redux-devtools-extension";
+import {applyMiddleware, compose, createStore} from "redux";
+import {addActionsClearing, countActions} from "./Middleware";
+import logger from "redux-logger";
+import {composeWithDevTools} from "redux-devtools-extension";
 
-// 1. AppState - Data in app level:
 export class ProductsState {
     public products: ProductModel[] = [];
 }
 
-// 2. ActionType - what we can do on our state:
-export enum ProductsActionType {
+export enum ProductActionType {
     FetchProducts = "FetchProducts",
     AddProduct = "AddProduct",
     UpdateProduct = "UpdateProduct",
     DeleteProduct = "DeleteProduct"
 }
 
-// 3. Action - A single action on the state:
 export interface ProductsAction {
-    type: ProductsActionType;
-    payload: any; // any --> list of products, single product...
+    type: ProductActionType,
+    payload: ProductModel | ProductModel[] | number,
 }
 
-// 4. Action Creators - functions for creating Action objects - each for different ActionType
-export function fetchProductsAction(products: ProductModel[]): ProductsAction {
-    return { type: ProductsActionType.FetchProducts, payload: products };
-}
-export function addProductAction(product: ProductModel): ProductsAction {
-    return { type: ProductsActionType.AddProduct, payload: product };
-}
-export function updateProductAction(product: ProductModel): ProductsAction {
-    return { type: ProductsActionType.UpdateProduct, payload: product };
-}
-export function deleteProductAction(id: number): ProductsAction {
-    return { type: ProductsActionType.DeleteProduct, payload: id };
+export const fetchProductsAction = (products: ProductModel[]): ProductsAction => {
+    return {
+        type: ProductActionType.FetchProducts,
+        payload: products
+    };
 }
 
-// 5. Reducer - perform the actual operation:
-export function productsReducer(currentState = new ProductsState(), action: ProductsAction): ProductsState {
+export const addProductAction = (product: ProductModel): ProductsAction => {
+    return {
+        type: ProductActionType.AddProduct,
+        payload: product
+    };
+}
 
-    const newState = { ...currentState };
+export const updateProductAction = (product: ProductModel): ProductsAction => {
+    return {
+        type: ProductActionType.UpdateProduct,
+        payload: product
+    };
+}
+
+export const deleteProductAction = (id: number): ProductsAction => {
+    return {
+        type: ProductActionType.DeleteProduct,
+        payload: id
+    };
+}
+
+export const productsReducer = (currentState = new ProductsState(), action: ProductsAction): ProductsState => {
+    const newState = {...currentState};
 
     switch (action.type) {
-
-        case ProductsActionType.FetchProducts: // Here, the payload is the list of all products.
-            newState.products = action.payload;
+        case ProductActionType.FetchProducts:
+            newState.products = action.payload as ProductModel[];
             break;
 
-        case ProductsActionType.AddProduct: // Here, the payload is a new product
-            newState.products.push(action.payload);
+        case ProductActionType.AddProduct:
+            newState.products.push(action.payload as ProductModel);
             break;
 
-        case ProductsActionType.UpdateProduct: // Here, the payload is an existing product
-            const indexToUpdate = newState.products.findIndex(p => p.id === action.payload.id);
-            if (indexToUpdate >= 0) newState.products[indexToUpdate] = action.payload;
+        case ProductActionType.UpdateProduct:
+            const indexToUpdate = newState.products.findIndex(p => p.id === (action.payload as ProductModel).id);
+
+            if (indexToUpdate !== -1) {
+                newState.products[indexToUpdate] = action.payload as ProductModel;
+            }
+
             break;
 
-        case ProductsActionType.DeleteProduct: // Here, the payload is product id
+        case ProductActionType.DeleteProduct:
             const indexToDelete = newState.products.findIndex(p => p.id === action.payload);
-            if (indexToDelete >= 0) newState.products.splice(indexToDelete, 1); // 1 = delete only one
+
+            if (indexToDelete !== -1) {
+                newState.products.splice(indexToDelete, 1);
+            }
+
             break;
+
+        default:
+            return newState;
     }
 
     return newState;
 }
 
-// 6. Store - the managing object:
+// export const productStore = createStore(productsReducer, compose(
+//     applyMiddleware(
+//         addActionsClearing,
+//         countActions,
+//         logger),
+//     composeWithDevTools()));
 
-// Without middleware, without devtools:
-// export const productsStore = createStore(productsReducer);
-
-// With middleware, without devtools:
-export const productsStore = createStore(
-    productsReducer, 
-    applyMiddleware(countActions, logger)
-);
-
-// // With devtools, without middleware:
-// export const productsStore = createStore(
-//     productsReducer, 
-//     composeWithDevTools()
-// );
-
-// // Width middleware, with devtools:
-// export const productsStore = createStore(
-//     productsReducer,
-//     compose(applyMiddleware(countActions, logger), composeWithDevTools())
-// );
-
+export const productStore = createStore(productsReducer, applyMiddleware(
+    addActionsClearing,
+    countActions,
+    logger
+));
